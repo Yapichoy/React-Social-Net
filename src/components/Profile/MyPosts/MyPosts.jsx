@@ -1,11 +1,7 @@
 import React from 'react';
 import Post from "./Post/Post";
 
-let posts = [
-  {id: 1, message: "Test", likesCount: 1},
-  {id: 2, message: "Test test", likesCount: 2}
-]
-const MyPosts = () => (
+const MyPosts = (props) => (
   <div>
     <h3>My Posts</h3>
     <div>
@@ -13,7 +9,7 @@ const MyPosts = () => (
       <button>Add Post</button>
     </div>
     <div className="posts">
-      { posts.map(item => (<Post message={item.message} likesCount={item.likesCount}/>))}
+      { props.posts.map(item => (<Post message={item.message} likesCount={item.likesCount}/>))}
     </div>
   </div>
 );
