@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import state, {addPost, updatePostText, subscribe} from "./redux/state";
+import store from "./redux/state";
 import ReactDOM from "react-dom";
 import App from "./App";
 
@@ -9,13 +9,13 @@ import App from "./App";
 let rerender = (state) => {
   ReactDOM.render(
     <React.StrictMode>
-      <App state={state} addPost={addPost} updatePostText={updatePostText}/>
+      <App state={state} addPost={store.addPost.bind(store)} updatePostText={store.updatePostText.bind(store)}/>
     </React.StrictMode>,
     document.getElementById('root')
   );
 }
-subscribe(rerender);
-rerender(state);
+store.subscribe(rerender);
+rerender(store.getState());
 
 
 reportWebVitals();
