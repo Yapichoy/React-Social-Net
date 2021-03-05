@@ -1,5 +1,6 @@
-const ADD_POST = 'ADD_POST',
-  UPDATE_POST_TEXT = 'UPDATE_POST_TEXT'
+import profileReducer from "./profileReducer";
+import dialogReducer from "./messageReducer";
+
 let store = {
   _state: {
     messagesPage: {
@@ -10,10 +11,11 @@ let store = {
       ],
 
       messages : [
-        {id: 1, name: 'Hello'},
-        {id: 2, name: 'How are you?'},
-        {id: 3, name: 'Maan'}
-      ]
+        {id: 1, message: 'Hello'},
+        {id: 2, message: 'How are you?'},
+        {id: 3, message: 'Maan'}
+      ],
+      newMessageTest: ''
     },
     profilePage: {
       posts : [
@@ -31,23 +33,9 @@ let store = {
   },
   rerender : null,
   dispatch(action) {
-    switch (action.type) {
-      case ADD_POST:
-        let newPost = {
-          id: 5,
-          message: this._state.profilePage.newPostText,
-          likesCount: 0
-        }
-        this._state.profilePage.posts.push(newPost);
-        this._state.profilePage.newPostText = '';
-        this.rerender(this._state);
-        break;
-      case UPDATE_POST_TEXT:
-        this._state.profilePage.newPostText = action.text;
-        this.rerender(this._state);
-        break;
-    }
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.messagesPage = dialogReducer(this._state.messagesPage, action);
+    this.rerender(this._state);
   }
 }
-
 export default store;

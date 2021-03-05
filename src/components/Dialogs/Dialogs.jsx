@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './Dialogs.module.css';
 import {NavLink} from "react-router-dom";
+import {addMessageActionCreator, updateMessageTextActionCreator} from "../../redux/messageReducer";
 
 const DialogItem = (props) => (
   <div className={s.dialog}>
@@ -11,25 +12,32 @@ const Message = (props) => (
   <div className={s.message}>{props.message}</div>
 )
 let messageRef = React.createRef();
-let sendMessage = () => {
-  console.log(messageRef.current.value);
-}
-const Dialogs = (props) => (
-  <div className={s.dialogs}>
+
+const Dialogs = (props) => {
+  let sendMessage = () => {
+    props.dispatch(addMessageActionCreator());
+  }
+  let updateMessageText = () => {
+    let message = messageRef.current.value;
+    props.dispatch(updateMessageTextActionCreator(message));
+  }
+  return <div className={s.dialogs}>
     <div className={s.dialogsItems}>
-      { props.state.dialogs.map(item => (<DialogItem name={item.name} id={item.id}/>)) }
+      <ul className="vertical menu">
+      {props.state.dialogs.map(item => (<li><DialogItem name={item.name} id={item.id}/></li>))}
+      </ul>
     </div>
     <div className={s.messages}>
       <div>
-        { props.state.messages.map(item => (<Message message={item.name}/>)) }
+        {props.state.messages.map(item => (<Message message={item.message}/>))}
       </div>
       <div>
-        <textarea name="" id="" cols="30" rows="10" ref={messageRef}></textarea>
-        <button onClick={sendMessage}>Send message</button>
+        <textarea name="" id="" cols="30" rows="10" ref={messageRef} value={props.state.newMessageTest} onChange={updateMessageText}></textarea>
+        <button className='button success' onClick={sendMessage}>Send message</button>
       </div>
 
     </div>
   </div>
-);
+};
 
 export default Dialogs;
