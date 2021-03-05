@@ -6,11 +6,11 @@ let newPostEl = React.createRef();
 
 const MyPosts = (props) => {
   let addPost = () => {
-    props.addPost();
+    props.dispatch({type: 'ADD_POST'});
   }
   let onChange = () => {
     let text = newPostEl.current.value;
-    props.updatePostText(text);
+    props.dispatch({type:'UPDATE_POST_TEXT', text});
   }
 
   return <div>
