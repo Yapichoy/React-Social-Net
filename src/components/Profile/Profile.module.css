@@ -1,3 +1,10 @@
  img {
     width: 100%;
 }
+ .textArea{
+     max-width: 600px;
+     margin-bottom: 8px;
+ }
+ .sendFormContainer {
+     margin-bottom: 8px;
+ }

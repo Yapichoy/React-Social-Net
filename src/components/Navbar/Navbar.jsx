@@ -11,9 +11,9 @@ const nav = [
 ]
 const Navbar = () => (
   <nav className={s.nav}>
-    <ul className="vertical menu">
-      {nav.map((n => (<li><NavLink to={n.link} className={s.item} activeClassName={s.active}>{n.text}</NavLink></li>))) }
-    </ul>
+    <nav className="nav flex-column">
+      {nav.map((n => (<NavLink to={n.link} className={`${s.item} nav-link`} activeClassName={'active'}>{n.text}</NavLink>))) }
+    </nav>
   </nav>
 );
 

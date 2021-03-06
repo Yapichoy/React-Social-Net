@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 
 const DialogItem = (props) => (
   <div className={s.dialog}>
-    <NavLink to={`/dialogs/${props.id}`}>{props.name}</NavLink>
+    <NavLink className='nav-link' to={`/dialogs/${props.id}`}>{props.name}</NavLink>
   </div>
 );
 const Message = (props) => (
@@ -21,17 +21,17 @@ const Dialogs = (props) => {
   }
   return <div className={s.dialogs}>
     <div className={s.dialogsItems}>
-      <ul className="vertical menu">
-      {props.dialogs.map(item => (<li><DialogItem name={item.name} id={item.id}/></li>))}
-      </ul>
+      <nav className="nav flex-column">
+        {props.dialogs.map(item => (<DialogItem name={item.name} id={item.id}/>))}
+      </nav>
     </div>
     <div className={s.messages}>
       <div>
         {props.messages.map(item => (<Message message={item.message}/>))}
       </div>
       <div>
-        <textarea name="" id="" cols="30" rows="10" ref={messageRef} value={props.newMessageText} onChange={updateMessageText}></textarea>
-        <button className='button success' onClick={sendMessage}>Send message</button>
+        <textarea className="form-control" name="" id="" rows="3" ref={messageRef} value={props.newMessageText} onChange={updateMessageText}></textarea>
+        <button className='btn btn-primary' onClick={sendMessage}>Send message</button>
       </div>
 
     </div>

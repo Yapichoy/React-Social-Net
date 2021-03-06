@@ -1,6 +1,20 @@
 .item {
-
+    width: 100%;
+    max-width: 600px;
+    border: 1px solid #cac9ca;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    box-shadow: 0 8px 8px #cac9ca;
+    display: flex;
 }
 .item img {
     width: 30px;
+}
+.itemInfoWrapper {
+    display: flex;
+    flex-direction: column;
+}
+.itemInfoWrapperBottom {
+    display: flex;
 }
