@@ -1,14 +1,16 @@
 import React from 'react';
 import s from './ProfileInfo.module.css'
-const ProfileInfo = () => (
+import img from '../../../assets/hqdefault_live.jpg';
+
+const ProfileInfo = (props) => (
   <div>
     <div>
       <img className={`${s.image} img-thumbnail rounded`}
-        src="https://avatars.mds.yandex.net/get-zen_doc/1107063/pub_5b90e349adeb8200aa3ace17_5b910175c586d600aa836613/scale_1200"
+        src={`${props?.photos?.small || img}`}
         alt=""/>
     </div>
     <div className={s.descriptionInfo}>
-      ava + description
+      {props.fullName}
     </div>
   </div>
 );
