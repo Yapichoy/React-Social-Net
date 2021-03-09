@@ -7,7 +7,6 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import {Provider} from "react-redux";
 
-
 let rerender = (state) => {
   ReactDOM.render(
     <React.StrictMode>

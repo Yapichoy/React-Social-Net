@@ -5,6 +5,7 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {connect} from "react-redux";
 import {getUserDataThunkCreator} from "../../redux/profileReducer";
 import {withRouter} from "react-router-dom";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 const Profile = (props) => {
   useEffect(()=>{
@@ -26,4 +27,4 @@ const mapStateToProps = (state) => {
 export default connect(
   mapStateToProps,
   {setUserProfile: getUserDataThunkCreator}
-  )(withRouter(Profile));
+  )(withRouter(WithAuthRedirect(Profile)));

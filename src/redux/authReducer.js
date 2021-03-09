@@ -24,7 +24,8 @@ export const setAuthActionCreator = () => ({type: SET_AUTH});
 
 export const checkAuthThunc = () => dispatch => {
   checkAuthApi().then(data => {
-    if (data?.data) {
+    debugger
+    if (data.resultCode === 0 ) {
       dispatch(setAuthActionCreator());
       dispatch(setUserDataActionCreator(data.data));
     }

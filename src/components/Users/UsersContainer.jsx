@@ -7,6 +7,7 @@ import {
   setUsersActionCreator,
   unfollowThunkCreator
 } from "../../redux/usersReducer";
+import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 
 const mapStateToProps = (state) => {
   return {
@@ -23,6 +24,6 @@ const UsersContainer = connect(mapStateToProps, {
   unfollowUser: unfollowThunkCreator,
   setUsers: getUsersThunkCreator,
   setCurrentPage:setCurrentPageActionCreator
-})(Users)
+})(WithAuthRedirect(Users))
 
 export default UsersContainer;

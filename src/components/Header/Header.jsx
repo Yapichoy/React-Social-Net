@@ -20,7 +20,7 @@ const Header = (props) => {
               {
                 props.isAuth?
                 <NavLink to={'/auth/logout'} className="nav-link" aria-current="page">Logout</NavLink> :
-                <NavLink to={'/auth/login'} className="nav-link" aria-current="page">Login</NavLink>
+                <NavLink to={'/login'} className="nav-link" aria-current="page">Login</NavLink>
               }
             </li>
           </ul>
