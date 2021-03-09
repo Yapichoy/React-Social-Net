@@ -2,7 +2,20 @@ import React from 'react';
 import {NavLink} from "react-router-dom";
 import s from './User.module.css'
 import photo from '../../assets/hqdefault_live.jpg'
+import {followApi, unfollowApi} from "../../api";
 const User = (props) => {
+  const follow = (uid) => {
+    followApi(uid).then(data => {
+      if (data.resultCode === 0)
+        props.follow(uid)
+    })
+  }
+  const unfollow = (uid) => {
+    unfollowApi(uid).then(data => {
+      if (data.resultCode === 0)
+        props.unfollow(uid)
+    })
+  }
   return (
     <>
       <div className="card">
@@ -15,17 +28,17 @@ const User = (props) => {
           {props.followed ? <a href="#" className="card-link"
                                onClick={e => {
                                  e.preventDefault();
-                                 props.unfollow(props.id)
+                                 unfollow(props.id)
                                }}
 
-            >Followed</a> :
+            >Unfollow</a> :
             <a href="#" className="card-link"
                onClick={(e) => {
                  e.preventDefault();
-                 props.follow(props.id)
+                 follow(props.id)
                }}
 
-            >Unfollowed</a>
+            >Follow</a>
           }
           <a href="#" className="card-link">Another link</a>
         </div>
