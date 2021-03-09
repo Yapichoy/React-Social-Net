@@ -1,3 +1,5 @@
+import {followApi, unfollowApi} from "../api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS;';
@@ -64,5 +66,17 @@ export const setCurrentPageActionCreator = (currentPage) => {
     type: SET_CURRENT_PAGE,
     currentPage
   }
+}
+export const followThunkCreator = (uid) => dispatch => {
+  followApi(uid).then(data => {
+    if (data.resultCode === 0)
+      dispatch(followActionCreator(uid));
+  })
+}
+export const unfollowThunkCreator = (uid) => dispatch => {
+  unfollowApi(uid).then(data => {
+    if (data.resultCode === 0)
+      dispatch(unfollowActionCreator(uid));
+  })
 }
 export default userReducer;

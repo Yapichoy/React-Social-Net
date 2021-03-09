@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from "react-redux";
 import Users from "./Users";
 import {
-  followActionCreator,
+  followThunkCreator,
   setCurrentPageActionCreator,
   setUsersActionCreator,
-  unfollowActionCreator
+  unfollowThunkCreator
 } from "../../redux/usersReducer";
 
 const mapStateToProps = (state) => {
@@ -17,14 +17,12 @@ const mapStateToProps = (state) => {
 
   }
 }
-const mapDispatchToProps = (dispatch) => {
-  return {
-    followUser:   id => dispatch(followActionCreator(id)),
-    unfollowUser: id => dispatch(unfollowActionCreator(id)),
-    setUsers: (users, totalCount) => dispatch(setUsersActionCreator(users, totalCount)),
-    setCurrentPage: (currentPage) => dispatch(setCurrentPageActionCreator(currentPage))
-  }
-}
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
+
+const UsersContainer = connect(mapStateToProps, {
+  followUser:   followThunkCreator,
+  unfollowUser: unfollowThunkCreator,
+  setUsers: setUsersActionCreator,
+  setCurrentPage:setCurrentPageActionCreator
+})(Users)
 
 export default UsersContainer;

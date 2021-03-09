@@ -1,3 +1,6 @@
+import {followApi} from "../api";
+import {followActionCreator} from "./usersReducer";
+
 const ADD_POST = 'ADD_POST',
   UPDATE_POST_TEXT = 'UPDATE_POST_TEXT',
   SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -28,4 +31,5 @@ const profileReducer = (state = initState, action) => {
 export const addPostActionCreator = () => ({type: ADD_POST});
 export const updatePostTextActionCreator = (text) => ({type: UPDATE_POST_TEXT, text});
 export const setUserProfileActionCreator = (profile) => ({type: SET_USER_PROFILE, profile});
+
 export default profileReducer;
