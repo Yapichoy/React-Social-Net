@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import Users from "./Users";
 import {
-  followThunkCreator,
+  followThunkCreator, getUsersThunkCreator,
   setCurrentPageActionCreator,
   setUsersActionCreator,
   unfollowThunkCreator
@@ -21,7 +21,7 @@ const mapStateToProps = (state) => {
 const UsersContainer = connect(mapStateToProps, {
   followUser:   followThunkCreator,
   unfollowUser: unfollowThunkCreator,
-  setUsers: setUsersActionCreator,
+  setUsers: getUsersThunkCreator,
   setCurrentPage:setCurrentPageActionCreator
 })(Users)
 

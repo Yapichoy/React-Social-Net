@@ -1,4 +1,4 @@
-import {followApi, unfollowApi} from "../api";
+import {followApi, getUsersApi, unfollowApi} from "../api";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -78,5 +78,10 @@ export const unfollowThunkCreator = (uid) => dispatch => {
     if (data.resultCode === 0)
       dispatch(unfollowActionCreator(uid));
   })
+}
+export const getUsersThunkCreator = (currentPage, pageSize) => dispatch => {
+  getUsersApi(currentPage, pageSize).then( data => {
+    dispatch(setUsersActionCreator(data.items, data.totalCount));
+  });
 }
 export default userReducer;

@@ -1,4 +1,4 @@
-import {followApi} from "../api";
+import {followApi, getUserDataApi} from "../api";
 import {followActionCreator} from "./usersReducer";
 
 const ADD_POST = 'ADD_POST',
@@ -32,4 +32,8 @@ export const addPostActionCreator = () => ({type: ADD_POST});
 export const updatePostTextActionCreator = (text) => ({type: UPDATE_POST_TEXT, text});
 export const setUserProfileActionCreator = (profile) => ({type: SET_USER_PROFILE, profile});
 
+export const getUserDataThunkCreator = (userId) => dispatch => {
+  if (userId !== 0)
+    getUserDataApi(userId).then( data => { dispatch(setUserProfileActionCreator(data)) });
+}
 export default profileReducer;

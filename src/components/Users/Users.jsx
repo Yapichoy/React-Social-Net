@@ -1,21 +1,14 @@
 import React, {useEffect}from 'react';
 import User from "./User";
-import {get} from "axios";
 import s from "./Users.module.css";
-import {getUsersApi} from "../../api";
 
 const Users = (props) => {
-  let setUsers = () => {
-    getUsersApi(props.currentPage, props.pageSize).then( data => {
-      props.setUsers(data.items, data.totalCount);
-    });
-  }
   let setCurrentPage = (p) => {
     props.setCurrentPage(p);
-    setUsers();
+    props.setUsers(props.currentPage, props.pageSize);
   }
   useEffect(() => {
-    setUsers();
+    props.setUsers(props.currentPage, props.pageSize);
   }, 0)
   let pagesCount = Math.ceil(props.totalUsersCount/ props.pageSize);
   let page = [];
