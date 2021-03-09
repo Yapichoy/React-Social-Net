@@ -1,3 +1,5 @@
+import {checkAuthApi} from "../api";
+
 const SET_USER_DATA = 'SET_USER_DATA';
 const SET_AUTH = 'SET_AUTH';
 const initState = {
@@ -19,4 +21,13 @@ const authReducer = (state = initState, action) => {
 }
 export const setUserDataActionCreator = (userData) => ({ type: SET_USER_DATA, userData });
 export const setAuthActionCreator = () => ({type: SET_AUTH});
+
+export const checkAuthThunc = () => dispatch => {
+  checkAuthApi().then(data => {
+    if (data?.data) {
+      dispatch(setAuthActionCreator());
+      dispatch(setUserDataActionCreator(data.data));
+    }
+  })
+}
 export default authReducer;

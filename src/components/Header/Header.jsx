@@ -2,17 +2,11 @@ import React, {useEffect} from 'react';
 import s from './Header.module.css';
 import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
-import {setAuthActionCreator, setUserDataActionCreator} from "../../redux/authReducer";
-import {checkAuthApi} from "../../api";
+import {checkAuthThunc} from "../../redux/authReducer";
 
 const Header = (props) => {
   useEffect(() => {
-    checkAuthApi().then(data => {
-        if (data?.data) {
-          props.setAuth();
-          props.setUserData(data.data);
-        }
-    })
+    props.checkAuth();
   }, 0);
   return (
     <header className={s.header}>
@@ -45,7 +39,6 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    setUserData: setUserDataActionCreator,
-    setAuth: setAuthActionCreator
+    checkAuth: checkAuthThunc
   }
   )(Header);
