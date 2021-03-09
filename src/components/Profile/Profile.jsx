@@ -2,16 +2,16 @@ import React, {useEffect} from 'react';
 import s from './Profile.module.css';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import {get} from "axios";
 import {connect} from "react-redux";
 import {setUserProfileActionCreator} from "../../redux/profileReducer";
 import {withRouter} from "react-router-dom";
+import {getUserDataApi} from "../../api";
 
 const Profile = (props) => {
   useEffect(()=>{
     let userId = props?.match?.params?.userId || 0;
     if (userId !== 0)
-      get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then( response => { props.setUserProfile(response.data) });
+      getUserDataApi(userId).then( data => { props.setUserProfile(data) });
   }, 0);
   return (
     <div>

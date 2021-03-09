@@ -3,19 +3,16 @@ import s from './Header.module.css';
 import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
 import {setAuthActionCreator, setUserDataActionCreator} from "../../redux/authReducer";
-import {get} from "axios";
+import {checkAuthApi} from "../../api";
 
 const Header = (props) => {
   useEffect(() => {
-    get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true}).then( response => {
-      debugger
-      if (response?.data?.data) {
-        props.setAuth();
-        props.setUserData(response.data.data);
-      }
-
-
-    });
+    checkAuthApi().then(data => {
+        if (data?.data) {
+          props.setAuth();
+          props.setUserData(data.data);
+        }
+    })
   }, 0);
   return (
     <header className={s.header}>

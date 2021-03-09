@@ -2,11 +2,12 @@ import React, {useEffect}from 'react';
 import User from "./User";
 import {get} from "axios";
 import s from "./Users.module.css";
+import {getUsersApi} from "../../api";
 
 const Users = (props) => {
   let setUsers = () => {
-    get(`https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.pageSize}`).then( response => {
-      props.setUsers(response.data.items, response.data.totalCount);
+    getUsersApi(props.currentPage, props.pageSize).then( data => {
+      props.setUsers(data.items, data.totalCount);
     });
   }
   let setCurrentPage = (p) => {
