@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {getUserDataThunkCreator} from "../../redux/profileReducer";
 import {withRouter} from "react-router-dom";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
+import {compose} from "redux";
 
 const Profile = (props) => {
   useEffect(()=>{
@@ -24,7 +25,9 @@ const mapStateToProps = (state) => {
     profile: state.profilePage.profile
   }
 }
-export default connect(
-  mapStateToProps,
-  {setUserProfile: getUserDataThunkCreator}
-  )(withRouter(WithAuthRedirect(Profile)));
+
+export default compose(
+  connect(mapStateToProps, {setUserProfile: getUserDataThunkCreator}),
+  withRouter,
+  WithAuthRedirect
+)(Profile);
