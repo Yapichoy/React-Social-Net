@@ -5,7 +5,7 @@ import {Field, reduxForm} from "redux-form";
 import {maxLength, required} from '../../../utils/validators';
 
 const maxLength30 = maxLength(30);
-const MyPosts = (props) => {
+const MyPosts = React.memo((props) => {
   let onSubmit = (values) => {
     props.addPost(values.postMessage);
   }
@@ -18,7 +18,7 @@ const MyPosts = (props) => {
       { props.posts.map(item => (<Post message={item.message} likesCount={item.likesCount}/>))}
     </div>
   </div>
-}
+});
 
 let MyPostForm = (props) => {
   return (

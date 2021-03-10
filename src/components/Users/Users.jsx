@@ -9,7 +9,7 @@ const Users = (props) => {
   }
   useEffect(() => {
     props.setUsers(props.currentPage, props.pageSize);
-  }, 0)
+  }, [props.users])
   let pagesCount = Math.ceil(props.totalUsersCount/ props.pageSize);
   let page = [];
   for(let i=1; i<pagesCount+1; i++) page.push(i)

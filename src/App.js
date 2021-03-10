@@ -13,7 +13,7 @@ import {initializeApp} from "./redux/appReducer";
 const App = (props) => {
   useEffect(() => {
     props.initializeApp();
-  }, 0);
+  }, [props.initialized]);
   return (
 
       <div className="app-wrapper">
@@ -28,9 +28,13 @@ const App = (props) => {
       </div>
   );
 }
-
+const mapDispatchToProps = (state) => {
+  return {
+    initialized: state.app.initialized
+  }
+}
 export default compose(withRouter, connect(
-  null,
+  mapDispatchToProps,
   {
     initializeApp: initializeApp
   }

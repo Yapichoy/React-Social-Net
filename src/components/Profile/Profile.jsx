@@ -18,7 +18,7 @@ const Profile = (props) => {
     let userId = props?.match?.params?.userId || props.userId;
     props.setUserProfile(userId);
     props.getStatus(userId);
-  }, 20);
+  }, [props.userId]);
   return (
     <div>
       <ProfileInfo {...props} />

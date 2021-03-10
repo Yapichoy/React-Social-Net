@@ -9,14 +9,13 @@ const initState = {
 const appReducer = (state = initState, action) => {
   switch (action.type) {
     case SET_INITIALIZED:
-      return { ...state, initialized: true};
+      return {...state, initialized: true};
   }
   return state;
 }
-export const setInitializedActionCreator = () => ({ type: SET_INITIALIZED });
-export const initializeApp = () => dispatch => {
-  dispatch(checkAuthThunc()).then(()=> {
-    dispatch(setInitializedActionCreator())
-  });
+export const setInitializedActionCreator = () => ({type: SET_INITIALIZED});
+export const initializeApp = () => async dispatch => {
+  await dispatch(checkAuthThunc())
+  dispatch(setInitializedActionCreator())
 }
 export default appReducer;

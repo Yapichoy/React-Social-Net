@@ -32,19 +32,17 @@ export const addPostActionCreator = (postMessage) => ({type: ADD_POST, postMessa
 export const setUserProfileActionCreator = (profile) => ({type: SET_USER_PROFILE, profile});
 export const updateStatusActionCreator = (status) => ({type: UPDATE_STATUS, status});
 
-export const getUserDataThunkCreator = (userId) => dispatch => {
-  if (userId !== 0)
-    getUserDataApi(userId).then( data => { dispatch(setUserProfileActionCreator(data)) });
+export const getUserDataThunkCreator = (userId) => async dispatch => {
+  let data = await getUserDataApi(userId);
+  dispatch(setUserProfileActionCreator(data));
 }
-export const updateStatusThunkCreator = (status) => dispatch => {
-    profileApi.setStatus(status).then( data => {
-      if (data.resultCode == 0)
+export const updateStatusThunkCreator = (status) => async dispatch => {
+    const data = await profileApi.setStatus(status);
+    if (data.resultCode == 0)
       dispatch(updateStatusActionCreator(status));
-    });
 }
-export const getStatusThunkCreator = (userId) => dispatch => {
-  profileApi.getStatus(userId).then( data => {
-      dispatch(updateStatusActionCreator(data));
-  });
+export const getStatusThunkCreator = (userId) => async dispatch => {
+  const data = await profileApi.getStatus(userId);
+  dispatch(updateStatusActionCreator(data));
 }
 export default profileReducer;

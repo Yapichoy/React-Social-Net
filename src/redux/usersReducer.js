@@ -5,8 +5,8 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS;';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 
-const initState =  {
-  users : [],
+const initState = {
+  users: [],
   pageSize: 10,
   totalUsersCount: 0,
   currentPage: 1
@@ -17,7 +17,7 @@ const userReducer = (state = initState, action) => {
       return {
         ...state,
         users: state.users.map(u => {
-          if (u.id === action.id)return { ...u, followed: true}
+          if (u.id === action.id) return {...u, followed: true}
           return u;
         })
       }
@@ -25,7 +25,7 @@ const userReducer = (state = initState, action) => {
       return {
         ...state,
         users: state.users.map(u => {
-          if (u.id === action.id)return { ...u, followed: false}
+          if (u.id === action.id) return {...u, followed: false}
           return u;
         })
       }
@@ -67,21 +67,18 @@ export const setCurrentPageActionCreator = (currentPage) => {
     currentPage
   }
 }
-export const followThunkCreator = (uid) => dispatch => {
-  followApi(uid).then(data => {
-    if (data.resultCode === 0)
-      dispatch(followActionCreator(uid));
-  })
+export const followThunkCreator = (uid) => async dispatch => {
+  const data = await followApi(uid);
+  if (data.resultCode === 0)
+    dispatch(followActionCreator(uid));
 }
-export const unfollowThunkCreator = (uid) => dispatch => {
-  unfollowApi(uid).then(data => {
-    if (data.resultCode === 0)
-      dispatch(unfollowActionCreator(uid));
-  })
+export const unfollowThunkCreator = (uid) => async dispatch => {
+  const data = await unfollowApi(uid)
+  if (data.resultCode === 0)
+    dispatch(unfollowActionCreator(uid));
 }
-export const getUsersThunkCreator = (currentPage, pageSize) => dispatch => {
-  getUsersApi(currentPage, pageSize).then( data => {
-    dispatch(setUsersActionCreator(data.items, data.totalCount));
-  });
+export const getUsersThunkCreator = (currentPage, pageSize) => async dispatch => {
+  const data = await getUsersApi(currentPage, pageSize);
+  dispatch(setUsersActionCreator(data.items, data.totalCount));
 }
 export default userReducer;

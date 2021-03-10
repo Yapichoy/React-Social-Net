@@ -31,29 +31,26 @@ export const setAuthActionCreator = () => ({type: SET_AUTH});
 export const loginActionCreator = (userId) => ({type: LOGIN, userId});
 export const logoutActionCreator = () => ({type: LOGOUT});
 
-export const checkAuthThunc = () => dispatch => {
-  return checkAuthApi().then(data => {
+export const checkAuthThunc = () => async dispatch => {
+    const data =  await checkAuthApi();
     if (data.resultCode === 0 ) {
       dispatch(setUserDataActionCreator(data.data));
       dispatch(setAuthActionCreator());
     }
-  })
 }
 
-export const loginThuncCreator = (formData) => dispatch => {
-  authApi.login(formData).then(data => {
+export const loginThuncCreator = (formData) => async dispatch => {
+  const data = await authApi.login(formData)
     let action = stopSubmit('login', {_error: 'Common error'});
     if (data.resultCode === 0 ) {
       dispatch(loginActionCreator(data.userId));
     } else {
       dispatch(action);
     }
-  })
 }
-export const logoutThuncCreator = () => dispatch => {
-  authApi.logout().then(data => {
+export const logoutThuncCreator = () => async dispatch => {
+  const data = await authApi.logout()
     if(data.resultCode === 0)
       dispatch(logoutActionCreator());
-  })
 }
 export default authReducer;
