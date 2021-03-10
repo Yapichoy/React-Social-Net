@@ -32,7 +32,7 @@ export const loginActionCreator = (userId) => ({type: LOGIN, userId});
 export const logoutActionCreator = () => ({type: LOGOUT});
 
 export const checkAuthThunc = () => dispatch => {
-  checkAuthApi().then(data => {
+  return checkAuthApi().then(data => {
     if (data.resultCode === 0 ) {
       dispatch(setUserDataActionCreator(data.data));
       dispatch(setAuthActionCreator());

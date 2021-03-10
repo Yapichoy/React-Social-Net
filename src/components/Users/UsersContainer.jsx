@@ -4,13 +4,13 @@ import Users from "./Users";
 import {
   followThunkCreator, getUsersThunkCreator,
   setCurrentPageActionCreator,
-  setUsersActionCreator,
   unfollowThunkCreator
 } from "../../redux/usersReducer";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
+import {getCurrentPage, getPageSize, getTotalUsersCount, getUsers} from "../../redux/users-selector";
 
-const mapStateToProps = (state) => {
+/*const mapStateToProps = (state) => {
   return {
     users: state.usersPage.users,
     pageSize: state.usersPage.pageSize,
@@ -18,8 +18,16 @@ const mapStateToProps = (state) => {
     currentPage: state.usersPage.currentPage
 
   }
-}
+}*/
+const mapStateToProps = (state) => {
+  return {
+    users: getUsers(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    currentPage: getCurrentPage(state)
 
+  }
+}
 export default compose(
   connect(mapStateToProps, {
     followUser:   followThunkCreator,

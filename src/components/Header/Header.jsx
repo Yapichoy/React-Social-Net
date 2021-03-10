@@ -5,9 +5,7 @@ import {NavLink} from "react-router-dom";
 import {checkAuthThunc, logoutThuncCreator} from "../../redux/authReducer";
 
 const Header = (props) => {
-  useEffect(() => {
-    props.checkAuth();
-  }, 0);
+
   const logout = (e) => {
     e.preventDefault();
     props.logout();
