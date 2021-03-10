@@ -1,9 +1,12 @@
 import React from 'react';
 import AuthForm from "./AuthForm";
+import {connect} from "react-redux";
+import {loginThuncCreator} from "../../redux/authReducer";
 
 const Login = (props) => {
   const onSubmit = (formData) => {
-    debugger
+
+    props.login(formData);
   }
   return(
     <>
@@ -13,4 +16,12 @@ const Login = (props) => {
   )
 }
 
-export default Login;
+let mapStateToProps = (state) => {
+  return {
+
+  }
+}
+
+export default connect(mapStateToProps, {
+  login: loginThuncCreator
+})(Login);

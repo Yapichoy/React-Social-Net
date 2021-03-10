@@ -30,12 +30,12 @@ export const unfollowApi = (userId) => {
 }
 
 export const profileApi = {
-  setStatus: (status) => {
-    return instance.put(`/profile/status`, {status}).then(response => response.data);
-  },
-  getStatus: (uid) => {
-    return instance.get(`/profile/status/${uid}`).then(response => {
-      return response.data;
-    });
-  }
+  setStatus: (status) => instance.put(`/profile/status`, {status}).then(response => response.data),
+  getStatus: (uid) => instance.get(`/profile/status/${uid}`).then(response => response.data)
+
+}
+
+export const authApi = {
+  login: (formData) => instance.post('auth/login', {...formData}).then(response => response.data),
+  logout: () => instance.delete('auth/login').then(resp => resp.data)
 }

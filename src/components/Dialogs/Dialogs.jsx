@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './Dialogs.module.css';
 import {NavLink} from "react-router-dom";
+import {Field, reduxForm} from "redux-form";
 
 const DialogItem = (props) => (
   <div className={s.dialog}>
@@ -10,14 +11,10 @@ const DialogItem = (props) => (
 const Message = (props) => (
   <div className={s.message}>{props.message}</div>
 )
-let messageRef = React.createRef();
 
 const Dialogs = (props) => {
-  let sendMessage = () => {
-    props.sendMessage();
-  }
-  let updateMessageText = () => {
-    props.updateMessageText(messageRef.current.value);
+  const onSubmit = (formData) => {
+    props.sendMessage(formData.message);
   }
   return <div className={s.dialogs}>
     <div className={s.dialogsItems}>
@@ -30,12 +27,21 @@ const Dialogs = (props) => {
         {props.messages.map(item => (<Message message={item.message}/>))}
       </div>
       <div>
-        <textarea className="form-control" name="" id="" rows="3" ref={messageRef} value={props.newMessageText} onChange={updateMessageText}></textarea>
-        <button className='btn btn-primary' onClick={sendMessage}>Send message</button>
+        <AddMessageForm {...props} onSubmit={onSubmit}/>
       </div>
 
     </div>
   </div>
 };
-
+let AddMessageForm = (props) => {
+  return (
+    <div>
+      <form onSubmit={props.handleSubmit}>
+        <Field component='textarea' className="form-control" name="message"/>
+        <button className='btn btn-primary'>Send message</button>
+      </form>
+    </div>
+  )
+}
+AddMessageForm = reduxForm({form: 'messageForm'})(AddMessageForm);
 export default Dialogs;
