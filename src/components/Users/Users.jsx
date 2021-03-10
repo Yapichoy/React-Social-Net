@@ -1,6 +1,7 @@
 import React, {useEffect}from 'react';
 import User from "./User";
 import s from "./Users.module.css";
+import Paginator from "./Paginator";
 
 const Users = (props) => {
   let setCurrentPage = (p) => {
@@ -10,14 +11,10 @@ const Users = (props) => {
   useEffect(() => {
     props.setUsers(props.currentPage, props.pageSize);
   }, [props.users])
-  let pagesCount = Math.ceil(props.totalUsersCount/ props.pageSize);
-  let page = [];
-  for(let i=1; i<pagesCount+1; i++) page.push(i)
+
   return (
     <>
-      <div>
-        { page.map(p => (<span onClick={()=>{setCurrentPage(p)}} className={ p==props.currentPage && s.currentPage}>{p}</span>))}
-      </div>
+     <Paginator totalUsersCount={props.totalUsersCount} pageSize={props.pageSize} currentPage={props.currentPage} setCurrentPage={setCurrentPage}/>
       <div>
       {props.users.map(u => (
         <User
