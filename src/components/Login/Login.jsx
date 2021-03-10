@@ -2,12 +2,13 @@ import React from 'react';
 import AuthForm from "./AuthForm";
 import {connect} from "react-redux";
 import {loginThuncCreator} from "../../redux/authReducer";
+import {Redirect} from "react-router-dom";
 
 const Login = (props) => {
   const onSubmit = (formData) => {
-
     props.login(formData);
   }
+  if(props.isAuth) return <Redirect to={'/profile'}/>
   return(
     <>
       <h1>Login</h1>
@@ -18,7 +19,7 @@ const Login = (props) => {
 
 let mapStateToProps = (state) => {
   return {
-
+    isAuth: state.auth.isAuth
   }
 }
 

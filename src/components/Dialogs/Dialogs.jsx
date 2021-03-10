@@ -2,7 +2,9 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import {NavLink} from "react-router-dom";
 import {Field, reduxForm} from "redux-form";
+import {maxLength, required} from "../../utils/validators";
 
+const maxLength100 = maxLength(100);
 const DialogItem = (props) => (
   <div className={s.dialog}>
     <NavLink className='nav-link' to={`/dialogs/${props.id}`}>{props.name}</NavLink>
@@ -37,7 +39,7 @@ let AddMessageForm = (props) => {
   return (
     <div>
       <form onSubmit={props.handleSubmit}>
-        <Field component='textarea' className="form-control" name="message"/>
+        <Field component='textarea' validate={[required, maxLength100]} className="form-control" name="message"/>
         <button className='btn btn-primary'>Send message</button>
       </form>
     </div>

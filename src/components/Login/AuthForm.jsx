@@ -1,18 +1,20 @@
 import React from 'react';
 import {Field, reduxForm} from "redux-form";
+import {maxLength, required} from "../../utils/validators";
+const maxLength100 = maxLength(100);
 const Form = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div className="row mb-3">
         <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">Email</label>
         <div className="col-sm-10">
-          <Field type="email" className="form-control" name='email' component='input'/>
+          <Field type="email" validate={[required, maxLength100]} className="form-control" name='email' component='input'/>
         </div>
       </div>
       <div className="row mb-3">
         <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">Password</label>
         <div className="col-sm-10">
-          <Field type="password" className="form-control" name='password' component='input'/>
+          <Field type="password" className="form-control" validate={[required]} name='password' component='input'/>
         </div>
       </div>
       <div className="row mb-3">

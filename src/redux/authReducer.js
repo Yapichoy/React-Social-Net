@@ -1,4 +1,5 @@
 import {authApi, checkAuthApi} from "../api";
+import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const SET_AUTH = 'SET_AUTH';
@@ -6,7 +7,7 @@ const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
 const initState = {
   data: {
-    'userId': null,
+    'id': null,
     'email': null,
     'login': null,
   },
@@ -33,16 +34,19 @@ export const logoutActionCreator = () => ({type: LOGOUT});
 export const checkAuthThunc = () => dispatch => {
   checkAuthApi().then(data => {
     if (data.resultCode === 0 ) {
-      dispatch(setAuthActionCreator());
       dispatch(setUserDataActionCreator(data.data));
+      dispatch(setAuthActionCreator());
     }
   })
 }
 
 export const loginThuncCreator = (formData) => dispatch => {
   authApi.login(formData).then(data => {
+    let action = stopSubmit('login', {_error: 'Common error'});
     if (data.resultCode === 0 ) {
       dispatch(loginActionCreator(data.userId));
+    } else {
+      dispatch(action);
     }
   })
 }

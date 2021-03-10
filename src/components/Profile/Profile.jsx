@@ -15,10 +15,10 @@ import {compose} from "redux";
 
 const Profile = (props) => {
   useEffect(()=>{
-    let userId = props?.match?.params?.userId || 6817;
+    let userId = props?.match?.params?.userId || props.userId;
     props.setUserProfile(userId);
     props.getStatus(userId);
-  }, 0);
+  }, 20);
   return (
     <div>
       <ProfileInfo {...props} />
@@ -29,7 +29,8 @@ const Profile = (props) => {
 const mapStateToProps = (state) => {
   return {
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    userId: state.auth.data.id
   }
 }
 
