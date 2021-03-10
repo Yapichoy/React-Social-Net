@@ -5,7 +5,7 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {connect} from "react-redux";
 import {
   getStatusThunkCreator,
-  getUserDataThunkCreator,
+  getUserDataThunkCreator, setPhotoThunkCreator,
   updateStatusActionCreator,
   updateStatusThunkCreator
 } from "../../redux/profileReducer";
@@ -21,7 +21,7 @@ const Profile = (props) => {
   }, [props.userId]);
   return (
     <div>
-      <ProfileInfo {...props} />
+      <ProfileInfo {...props} isOwner={!props.match.params.userId}/>
       <MyPostsContainer store={props.store}/>
     </div>
   );
@@ -39,7 +39,8 @@ export default compose(
     setUserProfile: getUserDataThunkCreator,
     updateStatus: updateStatusThunkCreator,
     getStatus: getStatusThunkCreator,
-    typeStatus: updateStatusActionCreator
+    typeStatus: updateStatusActionCreator,
+    savePhoto: setPhotoThunkCreator
   }),
   withRouter,
   WithAuthRedirect

@@ -31,7 +31,12 @@ export const unfollowApi = (userId) => {
 
 export const profileApi = {
   setStatus: (status) => instance.put(`/profile/status`, {status}).then(response => response.data),
-  getStatus: (uid) => instance.get(`/profile/status/${uid}`).then(response => response.data)
+  getStatus: (uid) => instance.get(`/profile/status/${uid}`).then(response => response.data),
+  setPhoto: (file) => {
+    const req = new FormData();
+    req.append('image', file);
+    return instance.put(`/profile/photo/`, req, {headers: {'COntent-Type': 'multipart/form-data'}}).then(response => response.data)
+  }
 
 }
 
