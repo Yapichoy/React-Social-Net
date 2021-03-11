@@ -8,7 +8,7 @@ import {
   getUserDataThunkCreator, setPhotoThunkCreator,
   updateStatusActionCreator,
   updateStatusThunkCreator
-} from "../../redux/profileReducer";
+} from "../../redux/profileReducer.ts";
 import {withRouter} from "react-router-dom";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";

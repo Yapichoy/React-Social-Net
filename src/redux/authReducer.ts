@@ -5,7 +5,16 @@ const SET_USER_DATA = 'SET_USER_DATA';
 const SET_AUTH = 'SET_AUTH';
 const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
-const initState = {
+
+export type InitStateType = {
+  data: {
+    id: number | null,
+    email: string | null,
+    login: string | null
+  },
+  isAuth: boolean
+}
+const initState: InitStateType = {
   data: {
     'id': null,
     'email': null,
@@ -13,23 +22,40 @@ const initState = {
   },
   isAuth: false
 };
-const authReducer = (state = initState, action) => {
+const authReducer = (state = initState, action):InitStateType => {
   switch (action.type) {
     case SET_USER_DATA:
       return { ...state, data: {...action.userData} };
     case SET_AUTH:
       return {...state, isAuth: true}
     case LOGIN:
-      return {...state, data: {...state.data, userId: action.userId}}
+      return {...state, data: {...state.data, id: action.userId}}
     case LOGOUT:
       return {...state, isAuth: false}
   }
   return state;
 }
-export const setUserDataActionCreator = (userData) => ({ type: SET_USER_DATA, userData });
-export const setAuthActionCreator = () => ({type: SET_AUTH});
-export const loginActionCreator = (userId) => ({type: LOGIN, userId});
-export const logoutActionCreator = () => ({type: LOGOUT});
+type UserDataType = {
+  type: typeof SET_USER_DATA,
+  userData: any
+}
+export const setUserDataActionCreator = (userData):UserDataType => ({ type: SET_USER_DATA, userData });
+
+type AuthType = {
+  type: typeof SET_AUTH
+}
+export const setAuthActionCreator = ():AuthType => ({type: SET_AUTH});
+
+type LoginType = {
+  type: typeof LOGIN,
+  userId: number
+}
+export const loginActionCreator = (userId: number):LoginType => ({type: LOGIN, userId});
+
+type LogoutType = {
+  type: typeof LOGOUT
+}
+export const logoutActionCreator = ():LogoutType => ({type: LOGOUT});
 
 export const checkAuthThunc = () => async dispatch => {
     const data =  await checkAuthApi();

@@ -1,7 +1,7 @@
 import React from 'react';
 import AuthForm from "./AuthForm";
 import {connect} from "react-redux";
-import {loginThuncCreator} from "../../redux/authReducer";
+import {loginThuncCreator} from "../../redux/authReducer.ts";
 import {Redirect} from "react-router-dom";
 
 const Login = (props) => {

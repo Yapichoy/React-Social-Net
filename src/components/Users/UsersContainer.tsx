@@ -1,25 +1,17 @@
 import React from 'react';
 import {connect} from "react-redux";
-import Users from "./Users";
+import Users from "./Users.tsx";
 import {
   followThunkCreator, getUsersThunkCreator,
   setCurrentPageActionCreator,
   unfollowThunkCreator
-} from "../../redux/usersReducer";
+} from "../../redux/usersReducer.ts";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
-import {getCurrentPage, getPageSize, getTotalUsersCount, getUsers} from "../../redux/users-selector";
+import {getCurrentPage, getPageSize, getTotalUsersCount, getUsers} from "../../redux/users-selector.ts";
+import {AppStateType} from "../../redux/redux-store";
 
-/*const mapStateToProps = (state) => {
-  return {
-    users: state.usersPage.users,
-    pageSize: state.usersPage.pageSize,
-    totalUsersCount: state.usersPage.totalUsersCount,
-    currentPage: state.usersPage.currentPage
-
-  }
-}*/
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType) => {
   return {
     users: getUsers(state),
     pageSize: getPageSize(state),

@@ -2,16 +2,16 @@ import './App.css';
 import React from 'react';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import  {withRouter, BrowserRouter, Route} from 'react-router-dom';
+import  {withRouter, Route} from 'react-router-dom';
 import {useEffect} from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {initializeApp} from "./redux/appReducer";
+import {initializeApp} from "./redux/appReducer.ts";
 
 const Login = React.lazy(() => import("./components/Login/Login"));
 const Profile =  React.lazy(() => import("./components/Profile/Profile"));
 const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer.js"));
-const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer"));
+const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer.tsx"));
 const App = (props) => {
   useEffect(() => {
     props.initializeApp();

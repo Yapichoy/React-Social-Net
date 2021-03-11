@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import s from './Header.module.css';
 import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
-import {checkAuthThunc, logoutThuncCreator} from "../../redux/authReducer";
+import {checkAuthThunc, logoutThuncCreator} from "../../redux/authReducer.ts";
 
 const Header = (props) => {
 

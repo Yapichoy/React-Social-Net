@@ -7,6 +7,7 @@ const ProfileInfo = (props) => {
     const file = e.target.files[0];
     props.savePhoto(file);
   }
+
   return (<div>
     <div>
       <img className={`${s.image} img-thumbnail rounded`}
@@ -15,7 +16,7 @@ const ProfileInfo = (props) => {
       {props.isOwner && <input type="file" onChange={onPhotoSelected}/>}
     </div>
     <div className={s.descriptionInfo}>
-      {props.profile.fullName}
+      {props.profile?.fullName}
     </div>
     <ProfileStatus status={props.status} updateStatus={props.updateStatus} typeStatus={props.typeStatus}/>
   </div>
