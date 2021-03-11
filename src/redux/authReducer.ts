@@ -1,5 +1,6 @@
-import {authApi, checkAuthApi} from "../api";
+import {authApi, checkAuthApi} from "../api.ts";
 import {stopSubmit} from "redux-form";
+import {MeResponseType, ResultCodes} from "../types/index.ts";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const SET_AUTH = 'SET_AUTH';
@@ -58,8 +59,8 @@ type LogoutType = {
 export const logoutActionCreator = ():LogoutType => ({type: LOGOUT});
 
 export const checkAuthThunc = () => async dispatch => {
-    const data =  await checkAuthApi();
-    if (data.resultCode === 0 ) {
+    const data: MeResponseType =  await checkAuthApi();
+    if (data.resultCode === ResultCodes.Success ) {
       dispatch(setUserDataActionCreator(data.data));
       dispatch(setAuthActionCreator());
     }
@@ -68,7 +69,7 @@ export const checkAuthThunc = () => async dispatch => {
 export const loginThuncCreator = (formData) => async dispatch => {
   const data = await authApi.login(formData)
     let action = stopSubmit('login', {_error: 'Common error'});
-    if (data.resultCode === 0 ) {
+    if (data.resultCode ===  ResultCodes.Success ) {
       dispatch(loginActionCreator(data.userId));
     } else {
       dispatch(action);
@@ -76,7 +77,7 @@ export const loginThuncCreator = (formData) => async dispatch => {
 }
 export const logoutThuncCreator = () => async dispatch => {
   const data = await authApi.logout()
-    if(data.resultCode === 0)
+    if(data.resultCode === ResultCodes.Success)
       dispatch(logoutActionCreator());
 }
 export default authReducer;

@@ -1,4 +1,5 @@
-import {followApi, getUsersApi, unfollowApi} from "../api";
+import { Dispatch } from "react";
+import {followApi, getUsersApi, unfollowApi} from "../api.ts";
 import {UserType} from "../types";
 
 const FOLLOW = 'FOLLOW';
@@ -71,7 +72,7 @@ export const setCurrentPageActionCreator = (currentPage: number) => {
     currentPage
   }
 }
-export const followThunkCreator = (uid: number) => async (dispatch:any) => {
+export const followThunkCreator = (uid: number) => async (dispatch: Dispatch<any>) => {
   const data = await followApi(uid);
   if (data.resultCode === 0)
     dispatch(followActionCreator(uid));

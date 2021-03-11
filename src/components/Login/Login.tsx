@@ -1,10 +1,17 @@
 import React from 'react';
-import AuthForm from "./AuthForm";
+import AuthForm from "./AuthForm.tsx";
 import {connect} from "react-redux";
 import {loginThuncCreator} from "../../redux/authReducer.ts";
 import {Redirect} from "react-router-dom";
+import {AuthType} from "../../types";
 
-const Login = (props) => {
+type MapStatePropsType = {
+  isAuth: boolean
+}
+type MapDispatchropsType = {
+  login: (formData: AuthType) => void
+}
+const Login:React.FC<MapStatePropsType & MapDispatchropsType> = (props) => {
   const onSubmit = (formData) => {
     props.login(formData);
   }
@@ -17,7 +24,7 @@ const Login = (props) => {
   )
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state): MapStatePropsType => {
   return {
     isAuth: state.auth.isAuth
   }

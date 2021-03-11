@@ -1,4 +1,4 @@
-import {getUserDataApi, profileApi} from "../api";
+import {getUserDataApi, profileApi} from "../api.ts";
 import {PostType, ProfileType} from "../types";
 
 const ADD_POST = 'ADD_POST',

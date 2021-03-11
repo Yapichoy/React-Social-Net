@@ -1,8 +1,8 @@
 import React from 'react';
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLength, required} from "../../utils/validators";
 const maxLength100 = maxLength(100);
-const Form = (props) => {
+const Form : React.FC<InjectedFormProps> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div className="row mb-3">

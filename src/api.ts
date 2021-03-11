@@ -1,4 +1,5 @@
-import * as axios from 'axios';
+import axios from 'axios';
+import {MeResponseType} from "./types";
 
 const instance = axios.create({
   baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -9,37 +10,41 @@ const instance = axios.create({
 });
 
 export const checkAuthApi = () => {
-  return instance.get(`auth/me`).then( response => response.data);
+  return instance.get<MeResponseType>(`auth/me`).then( response => response.data);
 }
 
-export const getUsersApi = (currentPage, pageSize) => {
+export const getUsersApi = (currentPage: number, pageSize: number) => {
   return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data);
 }
 
-export const getUserDataApi = (userId) => {
+export const getUserDataApi = (userId: number) => {
   return instance.get(`profile/${userId}`).then(response => response.data);
 }
 
-export const followApi = (userId) => {
+export const followApi = (userId: number) => {
   return instance.post(`follow/${userId}`).then(response => response.data);
 }
 
-export const unfollowApi = (userId) => {
+export const unfollowApi = (userId: number) => {
   return instance.delete(`follow/${userId}`).then(response => response.data);
 }
 
 export const profileApi = {
-  setStatus: (status) => instance.put(`/profile/status`, {status}).then(response => response.data),
-  getStatus: (uid) => instance.get(`/profile/status/${uid}`).then(response => response.data),
-  setPhoto: (file) => {
+  setStatus: (status: string) => instance.put(`/profile/status`, {status}).then(response => response.data),
+  getStatus: (uid: number) => instance.get(`/profile/status/${uid}`).then(response => response.data),
+  setPhoto: (file: any) => {
     const req = new FormData();
     req.append('image', file);
     return instance.put(`/profile/photo/`, req, {headers: {'COntent-Type': 'multipart/form-data'}}).then(response => response.data)
   }
 
 }
-
+type AuthDataType = {
+  email: string,
+  password: string,
+  rememberMe: boolean
+}
 export const authApi = {
-  login: (formData) => instance.post('auth/login', {...formData}).then(response => response.data),
+  login: (formData: AuthDataType) => instance.post('auth/login', {...formData}).then(response => response.data),
   logout: () => instance.delete('auth/login').then(resp => resp.data)
 }

@@ -8,7 +8,7 @@ import {connect} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/appReducer.ts";
 
-const Login = React.lazy(() => import("./components/Login/Login"));
+const Login = React.lazy(() => import("./components/Login/Login.tsx"));
 const Profile =  React.lazy(() => import("./components/Profile/Profile"));
 const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer.js"));
 const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer.tsx"));

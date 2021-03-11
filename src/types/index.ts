@@ -19,3 +19,21 @@ export type UserType = {
     followed: boolean,
     photos: PhotosType
 }
+export type AuthType = {
+    email: string,
+    password: string,
+    rememberMe: boolean
+}
+
+export enum ResultCodes {
+    Success = 0,
+    Error = 1,
+    CaptchaIsRequired = 10
+}
+
+//api.js
+export type MeResponseType = {
+    data: { id: number, email: string, login: string },
+    resultCode: ResultCodes,
+    messages: Array<string>
+}
