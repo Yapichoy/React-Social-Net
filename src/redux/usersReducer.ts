@@ -6,16 +6,22 @@ const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS;';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_FILTER = 'SET_FILTER';
 
 
 const initState = {
   users: [] as Array<UserType>,
   pageSize: 10,
   totalUsersCount: 0,
-  currentPage: 1
+  currentPage: 1,
+  filter: {
+    term: '',
+    friend: null as null | boolean
+  }
 }
 
 export type InitStateType = typeof initState;
+export type FilterType = typeof initState.filter;
 const userReducer = (state = initState, action:any):InitStateType => {
   switch (action.type) {
     case FOLLOW:
@@ -43,6 +49,10 @@ const userReducer = (state = initState, action:any):InitStateType => {
     case SET_CURRENT_PAGE:
       return {
         ...state, currentPage: action.currentPage
+      }
+    case SET_FILTER:
+      return {
+        ...state, filter: action.payload
       }
   }
   return state;
@@ -72,6 +82,9 @@ export const setCurrentPageActionCreator = (currentPage: number) => {
     currentPage
   }
 }
+export const actions = {
+  setFilter: (filter:FilterType) => ({type: SET_FILTER, payload: filter})
+}
 export const followThunkCreator = (uid: number) => async (dispatch: Dispatch<any>) => {
   const data = await followApi(uid);
   if (data.resultCode === 0)
@@ -82,8 +95,10 @@ export const unfollowThunkCreator = (uid: number) => async (dispatch:any) => {
   if (data.resultCode === 0)
     dispatch(unfollowActionCreator(uid));
 }
-export const getUsersThunkCreator = (currentPage: number, pageSize: number) => async (dispatch:any) => {
-  const data = await getUsersApi(currentPage, pageSize);
+export const getUsersThunkCreator = (currentPage: number, pageSize: number, filter: FilterType) => async (dispatch:any) => {
+  dispatch(actions.setFilter(filter));
+  const data = await getUsersApi(currentPage, pageSize, filter?.term ?? '', filter?.friend ?? null);
   dispatch(setUsersActionCreator(data.items, data.totalCount));
+
 }
 export default userReducer;

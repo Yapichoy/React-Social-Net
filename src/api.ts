@@ -13,8 +13,8 @@ export const checkAuthApi = () => {
   return instance.get<MeResponseType>(`auth/me`).then( response => response.data);
 }
 
-export const getUsersApi = (currentPage: number, pageSize: number) => {
-  return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data);
+export const getUsersApi = (currentPage: number, pageSize: number, term: string, friend: null | boolean = null) => {
+  return instance.get(`users?page=${currentPage}&count=${pageSize}&term=${term}`+(friend === null ? '' : `&friend=${friend}`)).then(response => response.data);
 }
 
 export const getUserDataApi = (userId: number) => {
