@@ -15,7 +15,7 @@ const initState = {
   currentPage: 1
 }
 
-type InitStateType = typeof initState;
+export type InitStateType = typeof initState;
 const userReducer = (state = initState, action:any):InitStateType => {
   switch (action.type) {
     case FOLLOW:

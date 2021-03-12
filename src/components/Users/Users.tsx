@@ -17,11 +17,11 @@ type PropsType = {
 const Users: React.FC<PropsType>= ({totalUsersCount, pageSize, currentPage, setCurrentPageFunc, setUsers, users, followUser, unfollowUser, portionSize}) => {
   let setCurrentPage = (p) => {
     setCurrentPageFunc(p);
-    setUsers(currentPage, pageSize);
+    setUsers(p, pageSize);
   }
   useEffect(() => {
     setUsers(currentPage, pageSize);
-  }, [users])
+  }, [])
 
   return (
     <>

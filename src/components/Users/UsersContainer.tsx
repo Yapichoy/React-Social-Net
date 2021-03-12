@@ -25,7 +25,7 @@ export default compose(
     followUser:   followThunkCreator,
     unfollowUser: unfollowThunkCreator,
     setUsers: getUsersThunkCreator,
-    setCurrentPage:setCurrentPageActionCreator
+    setCurrentPageFunc:setCurrentPageActionCreator
   }),
   WithAuthRedirect
 )(Users);

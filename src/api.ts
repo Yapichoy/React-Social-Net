@@ -28,7 +28,14 @@ export const followApi = (userId: number) => {
 export const unfollowApi = (userId: number) => {
   return instance.delete(`follow/${userId}`).then(response => response.data);
 }
-
+export const followUnfollowApi = {
+  followApi(userId: number) {
+    return instance.post(`follow/${userId}`).then(response => response.data);
+  },
+  unfollowApi(userId: number) {
+    return instance.delete(`follow/${userId}`).then(response => response.data);
+  }
+}
 export const profileApi = {
   setStatus: (status: string) => instance.put(`/profile/status`, {status}).then(response => response.data),
   getStatus: (uid: number) => instance.get(`/profile/status/${uid}`).then(response => response.data),

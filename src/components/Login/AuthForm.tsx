@@ -1,8 +1,9 @@
 import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLength, required} from "../../utils/validators";
+import {AuthType} from "../../types";
 const maxLength100 = maxLength(100);
-const Form : React.FC<InjectedFormProps> = (props) => {
+const Form : React.FC<InjectedFormProps<AuthType>> = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div className="row mb-3">
@@ -32,6 +33,6 @@ const Form : React.FC<InjectedFormProps> = (props) => {
   )
 }
 
-export default reduxForm({
+export default reduxForm<AuthType>({
   form: 'login'
 })(Form);
