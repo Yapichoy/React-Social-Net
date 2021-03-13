@@ -3,32 +3,38 @@ import s from './Header.module.css';
 import {connect} from "react-redux";
 import {NavLink} from "react-router-dom";
 import {checkAuthThunc, logoutThuncCreator} from "../../redux/authReducer.ts";
+import {Button, Col, Layout, Row, Space} from 'antd';
 
-const Header = (props) => {
+const {Header} = Layout;
+const MyHeader = (props) => {
 
   const logout = (e) => {
     e.preventDefault();
     props.logout();
   }
   return (
-    <header className={s.header}>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div className="collapse navbar-collapse d-flex justify-content-between">
-          <NavLink className="navbar-brand" to="/">
-            <img src="https://mediaprocessor.websimages.com/fit/1920x1920/gutternation.webs.com/Gutter%20Logo2.png" alt=""/>
-          </NavLink>
-          <ul className="navbar-nav mb-2 mb-lg-0">
-            <li className="nav-item">
-              {
-                props.isAuth?
-                <a href='#' onClick={logout} className="nav-link" aria-current="page">Logout</a> :
-                <NavLink to={'/login'} className="nav-link" aria-current="page">Login</NavLink>
-              }
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+    <Header className={`header ${s.header}`}>
+      <Row>
+        <Col span={20}>
+          <div className="logo">
+            <NavLink className="navbar-brand" to="/">
+              <img src="https://mediaprocessor.websimages.com/fit/1920x1920/gutternation.webs.com/Gutter%20Logo2.png"
+                   alt=""/>
+            </NavLink>
+          </div>
+        </Col>
+        <Col span={4} alig>
+          <Space align={"end"} direction={"vertical"} >
+          {
+            props.isAuth ?
+              <Button type={'primary'} onClick={logout}>Logout</Button> :
+              <NavLink to={'/login'}>Login</NavLink>
+          }
+          </Space>
+        </Col>
+
+      </Row>
+    </Header>
   )
 }
 
@@ -44,4 +50,4 @@ export default connect(
     checkAuth: checkAuthThunc,
     logout: logoutThuncCreator
   }
-  )(Header);
+)(MyHeader);
