@@ -3,6 +3,7 @@ import Post from "./Post/Post";
 import s from '../Profile.module.css';
 import {Field, reduxForm} from "redux-form";
 import {maxLength, required} from '../../../utils/validators';
+import {Button} from "antd";
 
 const maxLength30 = maxLength(30);
 const MyPosts = React.memo((props) => {
@@ -24,7 +25,7 @@ let MyPostForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <Field component='textarea' validate={[required, maxLength30]} className={`${s.textArea} form-control`}  name={'postMessage'}/>
-      <button className='btn btn-primary'>Add Post</button>
+      <Button type={'primary'}>Add Post</Button>
     </form>
   )
 }

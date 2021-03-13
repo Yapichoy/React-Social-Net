@@ -7,7 +7,7 @@ import {useEffect} from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {initializeApp} from "./redux/appReducer.ts";
-
+import 'antd/dist/antd.css';
 const Login = React.lazy(() => import("./components/Login/Login.tsx"));
 const Profile =  React.lazy(() => import("./components/Profile/Profile"));
 const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer.js"));

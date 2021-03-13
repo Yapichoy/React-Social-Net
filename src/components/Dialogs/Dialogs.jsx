@@ -3,6 +3,7 @@ import s from './Dialogs.module.css';
 import {NavLink} from "react-router-dom";
 import {Field, reduxForm} from "redux-form";
 import {maxLength, required} from "../../utils/validators";
+import {Button} from "antd";
 
 const maxLength100 = maxLength(100);
 const DialogItem = (props) => (
@@ -40,7 +41,7 @@ let AddMessageForm = (props) => {
     <div>
       <form onSubmit={props.handleSubmit}>
         <Field component='textarea' validate={[required, maxLength100]} className="form-control" name="message"/>
-        <button className='btn btn-primary'>Send message</button>
+        <Button type={'primary'}>Send message</Button>
       </form>
     </div>
   )

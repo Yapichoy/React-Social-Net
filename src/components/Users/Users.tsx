@@ -6,6 +6,8 @@ import {UserType} from "../../types";
 import {Form, Formik, Field} from 'formik';
 import UsersSearchForm from "./UsersSearchForm/UsersSearchForm.tsx";
 import {FilterType} from "../../redux/usersReducer";
+import {useHistory} from 'react-router-dom';
+import * as queryString from "querystring";
 
 type PropsType = {
     totalUsersCount: number,
@@ -26,18 +28,32 @@ const Users: React.FC<PropsType> = ({
                                         users,
                                         followUser,
                                         unfollowUser,
-                                        portionSize
+                                        portionSize,
+                                        filter
                                     }) => {
     let setCurrentPage = (p) => {
         setCurrentPageFunc(p);
-        setUsers(p, pageSize);
+        setUsers(p, pageSize, filter);
     }
     let onFilterChanged = (filter: FilterType) => {
         setUsers(1, pageSize, filter);
     }
+    const history = useHistory();
+    /*useEffect(()=>{
+        history.push({
+            pathname: '/users',
+            search: `?term=${filterProps?.term ?? ''}&friend=${filterProps?.friend ?? 'null'}&page=${currentPage}`
+        })
+    },[filterProps, currentPage])*/
     useEffect(() => {
-        setUsers(currentPage, pageSize);
-    }, [])
+        const parsed = queryString.parse(history.location.search.substr(1 )) as {term: string, page: string, friend: string};
+        let actualPage = parsed.page ? +parsed.page : currentPage;
+        let actualFilter = filter;
+        if (!!parsed.term) actualFilter = {...actualFilter, term: parsed.term as string};
+        if (!!parsed.friend) actualFilter = {...actualFilter, friend: parsed.friend};
+
+        setUsers(actualPage, pageSize, actualFilter);
+    },[])
 
     return (
         <>
