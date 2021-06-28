@@ -9,6 +9,7 @@ import {compose} from "redux";
 import {initializeApp} from "./redux/appReducer.ts";
 import 'antd/dist/antd.css';
 import { Layout, Menu, Breadcrumb } from 'antd';
+import ChatPage from "./pages/ChatPage.tsx";
 const Login = React.lazy(() => import("./components/Login/Login.tsx"));
 const Profile =  React.lazy(() => import("./components/Profile/Profile"));
 const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer.js"));
@@ -37,6 +38,7 @@ const App = (props) => {
               <Route path="/profile/:userId?" render={() => <React.Suspense fallback={'<div>Loading...</div>'}><Profile /></React.Suspense> }/>
               <Route path="/users" render={() => <React.Suspense fallback={'<div>Loading...</div>'}><UsersContainer /></React.Suspense> }/>
               <Route path="/login" render={() => <React.Suspense fallback={'<div>Loading...</div>'}><Login /></React.Suspense> }/>
+              <Route path="/chat" render={() => <React.Suspense fallback={'<div>Loading...</div>'}><ChatPage /></React.Suspense> }/>
             </div>
           </Content>
         </Layout>

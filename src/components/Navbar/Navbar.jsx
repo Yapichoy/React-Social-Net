@@ -10,10 +10,11 @@ const {Sider} = Layout;
 const nav = [
   {id: 1, link: '/profile', text: 'Profile'},
   {id: 2, link: '/dialogs', text: 'Message'},
-  {id: 3, link: '/users', text: 'Users'},
-  {id: 4, link: '/', text: 'News'},
-  {id: 5, link: '/', text: 'Music'},
-  {id: 6, link: '/', text: 'Settings'}
+  {id: 3, link: '/chat', text: 'Chat'},
+  {id: 4, link: '/users', text: 'Users'},
+  {id: 5, link: '/', text: 'News'},
+  {id: 6, link: '/', text: 'Music'},
+  {id: 7, link: '/', text: 'Settings'}
 ]
 const Navbar = () => (
   <nav className={s.nav}>
